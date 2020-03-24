@@ -342,9 +342,9 @@ TEST_F(SshfsMount, executes_commands)
         {"sudo /bin/bash -c 'P=\"/home/ubuntu/target\"; while [ ! -d \"$P/\" ]; do P=${P%/*}; done; echo $P/'",
          "/home/ubuntu/"},
         {"sudo /bin/bash -c 'cd \"/home/ubuntu/\" && mkdir -p \"target\"'", ""},
-        {"id -nu", "ubuntu"},
-        {"id -ng", "ubuntu"},
-        {"sudo /bin/bash -c 'cd \"/home/ubuntu/\" && chown -R ubuntu:ubuntu target'", ""},
+        {"id -u", "1000"},
+        {"id -g", "1000"},
+        {"sudo /bin/bash -c 'cd \"/home/ubuntu/\" && chown -R 1000:1000 target'", ""},
         {"id -u", "1000"},
         {"id -g", "1000"},
         {"sudo sshfs -o slave -o nonempty -o transform_symlinks -o allow_other :\"source\" \"target\"", "don't care"}};
